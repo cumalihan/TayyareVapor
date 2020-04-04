@@ -10,6 +10,9 @@ public func routes(_ router: Router) throws {
     let airPlanesController = AirplaneController()
     try router.register(collection: airPlanesController)
     
+    let airPortsController = AirPortsController()
+    try router.register(collection: airPortsController)
+    
 }
 
     
