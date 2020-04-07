@@ -31,5 +31,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     migrations.add(model: AirPlane.self, database: .sqlite)
     migrations.add(model: AirPort.self, database: .sqlite)
     migrations.add(model: AirCompany.self, database: .sqlite)
+    migrations.add(model: City.self, database: .sqlite)
+    
     services.register(migrations)
 }

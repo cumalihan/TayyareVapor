@@ -1,23 +1,24 @@
-import Foundation
+
 import FluentSQLite
 import Vapor
 
 final class AirCompany: Codable {
-    var id: UUID?
-    var flightNumber: String
+    var id: Int?
     var company: String
-    var maxSeat: Int?
+    var companyCountry: String
+    var airPlaneCount: Int?
     
     
-    init(flightNumber:String,company:String,maxSeat: Int) {
-        self.flightNumber = flightNumber
+    init(company:String, companyCountry: String, airPlaneCount: Int) {
         self.company = company
-        self.maxSeat = maxSeat
+        self.companyCountry = companyCountry
+        self.airPlaneCount = airPlaneCount
+        
     }
 }
 
 
-extension AirCompany: SQLiteUUIDModel {}
+extension AirCompany:  SQLiteModel {}
 extension AirCompany : Content {}
 extension AirCompany: Migration {}
 extension AirCompany: Parameter {}
