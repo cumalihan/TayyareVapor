@@ -1,4 +1,5 @@
 import Vapor
+import Fluent
 
 
 struct AcronymsController: RouteCollection {
@@ -10,6 +11,7 @@ struct AcronymsController: RouteCollection {
         acronymsRoute.get(Acronym.parameter, use: getHandler)
         acronymsRoute.delete(Acronym.parameter, use: deleteHandler)
         acronymsRoute.put(Acronym.parameter, use: updateHandler)
+        acronymsRoute.get("search", use: searchHandler)
     }
     func getAllHandler(_ req: Request) throws -> Future<[Acronym]> {
         return Acronym.query(on: req).all()
@@ -33,4 +35,15 @@ struct AcronymsController: RouteCollection {
             
         }
     }
+    
+    func searchHandler(_ req: Request) throws -> Future<[Acronym]> {
+        guard let searchTerm = req.query[String.self,at: "term"] else {
+            throw Abort(.badRequest)
+        }
+        return Acronym.query(on: req).group(.or) { or in
+            or.filter(\.short == searchTerm)
+            or.filter(\.long == searchTerm)
+        }.all()
+    }
+
 }

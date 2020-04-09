@@ -1,6 +1,7 @@
 import Vapor
 
 
+
 struct AirPortsController: RouteCollection {
     func boot(router: Router) throws {
         let airportsRoute = router.grouped("api","airports")
@@ -9,6 +10,8 @@ struct AirPortsController: RouteCollection {
         airportsRoute.get(AirPort.parameter, use: getHandler)
         airportsRoute.delete(AirPort.parameter, use: deleteHandler)
         airportsRoute.put(AirPort.parameter, use: updateHandler)
+        airportsRoute.get(AirPort.parameter,"cities", use: getCitiesHandler)
+        airportsRoute.post(AirPort.parameter,"cities",City.parameter, use: addCitiesHandler)
     }
     func getAllHandler(_ req: Request) throws -> Future<[AirPort]> {
         return AirPort.query(on: req).all()
@@ -31,4 +34,17 @@ struct AirPortsController: RouteCollection {
             return airport.save(on: req)
         }
     }
-}
+    
+    func getCitiesHandler(_ req: Request) throws -> Future<[City]> {
+        return try req.parameters.next(AirPort.self).flatMap(to: [City].self) { airport in
+            return try airport.cities.query(on: req).all()
+            
+        }
+    }
+    func addCitiesHandler(_ req: Request) throws -> Future<HTTPStatus> {
+        return try flatMap(to: HTTPStatus.self, req.parameters.next(AirPort.self), req.parameters.next(City.self)){ airport,city in
+            let pivot = try AirPortCityPivot(airport.requireID(),city.requireID())
+            return pivot.save(on: req).transform(to: .ok)
+        }
+    }
+    }

@@ -19,3 +19,10 @@ extension City: SQLiteModel {}
 extension City: Content {}
 extension City: Migration {}
 extension City: Parameter {}
+
+
+extension City {
+    var airports : Siblings<City,AirPort,AirPortCityPivot> {
+        return siblings()
+    }
+}

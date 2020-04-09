@@ -20,3 +20,13 @@ extension AirPort : Content {}
 extension AirPort: Migration {}
 extension AirPort: Parameter {}
 
+
+extension AirPort {
+    
+    var cities: Siblings<AirPort,City,AirPortCityPivot> {
+        return siblings()
+    }
+    
+    
+}
+
