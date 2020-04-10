@@ -1,8 +1,9 @@
-import FluentSQLite
+import FluentMySQL
 import Vapor
 import Foundation
 
-final class AirPortCityPivot : SQLiteUUIDPivot {
+
+final class AirPortCityPivot : MySQLUUIDPivot {
     var id: UUID?
     var airportID: AirPort.ID
     var cityID: City.ID

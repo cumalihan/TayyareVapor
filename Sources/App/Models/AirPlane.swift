@@ -1,5 +1,5 @@
 import Foundation
-import FluentSQLite
+import FluentMySQL
 import Vapor
 
 final class AirPlane: Codable {
@@ -15,7 +15,7 @@ final class AirPlane: Codable {
     }
 }
 
-extension AirPlane: SQLiteUUIDModel {}
+extension AirPlane: MySQLUUIDModel {}
 extension AirPlane: Content {}
 extension AirPlane: Migration {}
 extension AirPlane: Parameter {}

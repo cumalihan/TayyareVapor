@@ -1,5 +1,5 @@
 
-import FluentSQLite
+import FluentMySQL
 import Vapor
 
 final class AirCompany: Codable {
@@ -18,7 +18,7 @@ final class AirCompany: Codable {
 }
 
 
-extension AirCompany:  SQLiteModel {}
+extension AirCompany: MySQLModel {}
 extension AirCompany : Content {}
 extension AirCompany: Migration {}
 extension AirCompany: Parameter {}

@@ -1,6 +1,6 @@
-import FluentSQLite
+import FluentMySQL
 import Vapor
-
+import Foundation
 
 final class City: Codable {
     var id: Int?
@@ -15,7 +15,7 @@ final class City: Codable {
 }
 
 
-extension City: SQLiteModel {}
+extension City: MySQLModel {}
 extension City: Content {}
 extension City: Migration {}
 extension City: Parameter {}
