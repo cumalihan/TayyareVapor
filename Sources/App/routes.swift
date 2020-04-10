@@ -19,6 +19,9 @@ public func routes(_ router: Router) throws {
     let citiesController = CitiesController()
     try router.register(collection: citiesController)
     
+    let websiteController = WebsiteController()
+    try router.register(collection: websiteController)
+    
 }
 
     
