@@ -1,12 +1,21 @@
-<!DOCTYPE html>
+#set("content") {
+    <h1>City</h1>
 
-<html lang="en">
+    #if(cities) {
+      <table>
+        <thead>
+          <tr><th>City Name</th><th>City Country</th></tr>
+        </thead>
+        <tbody>
+          #for(city in cities) {
+            <tr><td>#(city.cityName)</td><td>#(city.cityCountry)</td></tr>
+          }
+        </tbody>
+      </table>
 
-  <head>
-    <meta charset= "utf-8">
-    <title>#(title) </title>
-  </head>
-  <body>
-    <h1> Hello World</h1>
-  </body>
-</html>
+    } else {
+      <h2> There aren't any cities yet!</h2>
+    }
+}
+
+#embed("base")

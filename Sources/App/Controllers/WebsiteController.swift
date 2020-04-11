@@ -6,11 +6,15 @@ struct WebsiteController: RouteCollection {
         
     }
     func indexHandler(_ req: Request) throws -> Future<View> {
-        let context = IndexContext(title: "Homepage")
-        return try req.view().render("index",context)
+        return City.query(on: req).all().flatMap(to: View.self) { cities in
+            let context = IndexContext(title: "Homepage",cities: cities.isEmpty ? nil : cities)
+            return try req.view().render("index",context)
+        }
+        
     }
 }
 
 struct IndexContext : Encodable {
     let title: String
+    let cities: [City]?
 }
