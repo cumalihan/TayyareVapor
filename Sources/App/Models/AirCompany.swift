@@ -3,7 +3,7 @@ import FluentMySQL
 import Vapor
 
 final class AirCompany: Codable {
-    var id: Int?
+    var id: UUID?
     var company: String
     var companyCountry: String
     var airPlaneCount: Int?
@@ -18,7 +18,14 @@ final class AirCompany: Codable {
 }
 
 
-extension AirCompany: MySQLModel {}
+extension AirCompany: MySQLUUIDModel {}
 extension AirCompany : Content {}
 extension AirCompany: Migration {}
 extension AirCompany: Parameter {}
+
+
+extension AirCompany {
+    var airplane: Children<AirCompany, AirPlane> {
+        return children(\.aircompanyID)
+    }
+}

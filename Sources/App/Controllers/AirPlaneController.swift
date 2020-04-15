@@ -9,6 +9,7 @@ struct AirplaneController: RouteCollection {
         airplanesRoute.get(AirPlane.parameter, use: getHandler)
         airplanesRoute.delete(AirPlane.parameter, use: deleteHandler)
         airplanesRoute.put(AirPlane.parameter, use: updateHandler)
+        airplanesRoute.get(AirPlane.parameter,"aircompany",use: getCompanyHandler)
     }
     
     
@@ -34,6 +35,13 @@ struct AirplaneController: RouteCollection {
             airplane.model = updatedAirplane.model
             return airplane.save(on: req)
    
+        }
+    }
+
+    func getCompanyHandler(_ req: Request) throws -> Future<AirCompany> {
+        return try req.parameters.next(AirPlane.self).flatMap(to: AirCompany.self) { airplane in
+            return airplane.aircompany.get(on: req)
+            
         }
     }
     

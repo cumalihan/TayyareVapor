@@ -7,6 +7,7 @@ struct AirCompaniesController: RouteCollection {
         aircompaniesRoute.post(AirCompany.self,use: createHandler)
         aircompaniesRoute.get(AirCompany.parameter, use: getHandler)
         aircompaniesRoute.delete(AirCompany.parameter, use: deleteHandler)
+        aircompaniesRoute.get(AirCompany.parameter,"airplanes",use: getPlaneHandler)
         
     }
     
@@ -24,6 +25,11 @@ struct AirCompaniesController: RouteCollection {
         return try req.parameters.next(AirCompany.self).flatMap(to: HTTPStatus.self) { aircompany in
             return aircompany.delete(on: req).transform(to: .noContent)
             
+        }
+    }
+    func getPlaneHandler(_ req: Request) throws -> Future<[AirPlane]> {
+        return try req.parameters.next(AirCompany.self).flatMap(to: [AirPlane].self) { aircompany in
+            return try aircompany.airplane.query(on: req).all()
         }
     }
     
