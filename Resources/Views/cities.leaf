@@ -1,0 +1,14 @@
+#set("content") {
+
+<h1>City</h1>
+
+#if(cities) {
+<h1> #(city.name) </h1>
+
+} else {
+<h2> There aren't any city yet!</h2>
+    }
+}
+
+
+#embed("base")

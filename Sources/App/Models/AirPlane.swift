@@ -7,11 +7,13 @@ final class AirPlane: Codable {
     var brand: String
     var model: String
     var detail: String
+    var aircompanyID : AirCompany.ID
     
-    init(brand: String,model: String,detail: String) {
+    init(brand: String,model: String,detail: String,aircompanyID : AirCompany.ID) {
         self.brand = brand
         self.model = model
         self.detail = detail
+        self.aircompanyID = aircompanyID
     }
 }
 
