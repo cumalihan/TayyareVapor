@@ -22,6 +22,10 @@
            <ul>
                <li class="#if(title == "Airports") text-white {active}"><a href="/airports" class="text-white">Airports</a></li>
            </ul>
+           <ul>
+               <li class="#if(title == "Airplanes") text-white {active}"><a href="/airplanes" class="text-white">AirPlanes</a></li>
+           </ul>
+
       </nav>
       <div class = "container mt-3">
           #get(content)

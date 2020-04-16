@@ -9,7 +9,7 @@ struct AirplaneController: RouteCollection {
         airplanesRoute.get(AirPlane.parameter, use: getHandler)
         airplanesRoute.delete(AirPlane.parameter, use: deleteHandler)
         airplanesRoute.put(AirPlane.parameter, use: updateHandler)
-        airplanesRoute.get(AirPlane.parameter,"aircompany",use: getCompanyHandler)
+        airplanesRoute.get(AirPlane.parameter,"aircompanies",use: getCompanyHandler)
     }
     
     

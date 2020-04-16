@@ -2,7 +2,7 @@
 
 <h1>City</h1>
 
-#if(cities) {
+#if(airplane) {
 <h1> #(city.name) </h1>
 
 } else {
