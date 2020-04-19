@@ -25,6 +25,12 @@
            <ul>
                <li class="#if(title == "Airplanes") text-white {active}"><a href="/airplanes" class="text-white">AirPlanes</a></li>
            </ul>
+           <ul>
+               <li class="#if(title == "All AirCompany") text-white {active}"><a href="/aircompanies" class="text-white">All AirCompanies</a></li>
+           </ul>
+           <ul>
+               <li class="#if(title == "Create An AirCompany") text-white {active}"><a href="/airplanes/create" class="text-white">Create Airplanes</a></li>
+           </ul>
 
       </nav>
       <div class = "container mt-3">

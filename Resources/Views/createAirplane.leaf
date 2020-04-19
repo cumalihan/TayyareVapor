@@ -1,0 +1,34 @@
+
+#set("content") {
+  <h1>Create an Airplane</h1>
+<form method="post">
+    
+    <div class = "form-group">
+        <label for= "brand">Brand</label>
+        <input type="text" id="brand" name="brand" placeholder="Enter Airplane Brand" class="form-control">
+    </div>
+    <div class = "form-group">
+        <label for = "model">Model</label>
+        <input type="text" id="model" name="model" placeholder="Enter Airplane Model" class="form-control">
+    </div>
+     <div class = "form-group">
+        <label for = "detail">Detail</label>
+        <input type="text" id="detail" name="detail" placeholder="Enter Airplane Detail" class="form-control">
+    </div>
+         
+         <div class = "form-group">
+        <label for="aircompanyID">Air Company</label>
+            <select id="aircompanyID" name="aircompanyID" class="form-control">
+                    #for(aircompany in aircompanies) {
+                    <option value ="#(aircompany.id)">#(aircompany.company)</option>
+                    }
+            </select>
+             </div>
+       <button type="submit" class = "btn btn-primary">Submit </button>
+       
+       
+                
+        
+    </form>
+}
+#embed("base")

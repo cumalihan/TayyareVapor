@@ -1,0 +1,8 @@
+
+#set("content") {
+
+  <h1>#(aircompany.company)</h1>
+    <h2>#(aircompany.companyCountry)</h1>
+        #embed("airplanesTable")
+}
+#embed("base")
