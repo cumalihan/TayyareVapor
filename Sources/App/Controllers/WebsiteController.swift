@@ -7,7 +7,7 @@ struct WebsiteController: RouteCollection {
         router.get("aircompanies",AirCompany.parameter,use: aircompanyHandler)
         router.get("aircompanies", use: allAircompanyHandler)
         router.get("airplanes","create",use: createAirplaneHandler)
-        router.post(AirPlane.self,at: "airplane","create", use: createAirplanePostHandler)
+        router.post(AirPlane.self,at: "airplanes","create", use: createAirplanePostHandler)
         
         
         
