@@ -8,7 +8,8 @@ struct WebsiteController: RouteCollection {
         router.get("aircompanies", use: allAircompanyHandler)
         router.get("airplanes","create",use: createAirplaneHandler)
         router.post(AirPlane.self,at: "airplanes","create", use: createAirplanePostHandler)
-        
+        router.get("airplanes",AirPlane.parameter,"edit",use: editAirplaneHandler)
+        router.post("airplanes",AirPlane.parameter,"edit", use: editAirplanePostHandler)
         
         
      
@@ -57,6 +58,30 @@ struct WebsiteController: RouteCollection {
         }
     }
     
+    func editAirplaneHandler(_ req: Request) throws -> Future<View> {
+        return try flatMap(to: View.self, req.parameters.next(AirPlane.self), AirCompany.query(on: req).all()) { airplane, aircompanies in
+            let context = EditAirplaneContext(title: "Edit Airplane", airplane: airplane, aircompanies: aircompanies)
+            return try req.view().render("createAirplane", context)
+        }
+    }
+    
+    func editAirplanePostHandler(_ req: Request) throws -> Future<Response> {
+        return try req.parameters.next(AirPlane.self).flatMap(to: Response.self) { airplane in
+            let updatedAirplane = try req.content.syncDecode(AirPlane.self)
+            airplane.brand = updatedAirplane.brand
+            airplane.detail = updatedAirplane.detail
+            airplane.model = updatedAirplane.model
+            airplane.aircompanyID = updatedAirplane.aircompanyID
+            
+            return airplane.save(on: req).map(to: Response.self) { savedAirplane in
+                guard let id = savedAirplane.id else {
+                    return req.redirect(to: "/")
+                }
+                return req.redirect(to: "/airplanes/\(id)")
+            }
+        }
+    }
+    
 }
 
 struct IndexContext : Encodable {
@@ -86,4 +111,11 @@ struct AllAircompanyContext : Encodable {
 struct CreateAirplaneContext: Encodable {
     let title = "Create An Airplane"
     let aircompanies : Future<[AirCompany]>
+}
+
+struct EditAirplaneContext: Encodable {
+    let title: String
+    let airplane: AirPlane
+    let aircompanies : [AirCompany]
+    let editing = true
 }

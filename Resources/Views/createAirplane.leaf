@@ -1,30 +1,33 @@
 
 #set("content") {
-  <h1>Create an Airplane</h1>
+<h1>#if(editing){Edit Airplane} else {Create an Airplane}</h1>
 <form method="post">
     
     <div class = "form-group">
         <label for= "brand">Brand</label>
-        <input type="text" id="brand" name="brand" placeholder="Enter Airplane Brand" class="form-control">
+        <input type="text" id="brand" name="brand" placeholder="Enter Airplane Brand"
+        class="form-control" #if(editing) {value ="#(airplane.brand)"}>
     </div>
     <div class = "form-group">
         <label for = "model">Model</label>
-        <input type="text" id="model" name="model" placeholder="Enter Airplane Model" class="form-control">
+        <input type="text" id="model" name="model" placeholder="Enter Airplane Model"
+            class="form-control" #if(editing) {value ="#(airplane.model)"}>
     </div>
      <div class = "form-group">
         <label for = "detail">Detail</label>
-        <input type="text" id="detail" name="detail" placeholder="Enter Airplane Detail" class="form-control">
+        <input type="text" id="detail" name="detail" placeholder="Enter Airplane Detail"
+            class="form-control" #if(editing) {value ="#(airplane.detail)"}>
     </div>
          
          <div class = "form-group">
         <label for="aircompanyID">Air Company</label>
             <select id="aircompanyID" name="aircompanyID" class="form-control">
                     #for(aircompany in aircompanies) {
-                    <option value ="#(aircompany.id)">#(aircompany.company)</option>
+                    <option value ="#(aircompany.id)" #if(aircompany.id == airplane.aircompanyID {selected}>#(aircompany.company)</option>
                     }
             </select>
              </div>
-       <button type="submit" class = "btn btn-primary">Submit</button>
+         <button type="submit" class = "btn btn-primary">#if(editing){Update} else {Submit}</button>
        
        
                 
