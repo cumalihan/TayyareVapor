@@ -15,8 +15,8 @@ final class AirPortCityPivot : MySQLUUIDPivot {
     static var rightIDKey: RightIDKey = \AirPortCityPivot.cityID
     
     init(_ airportID: AirPort.ID,_ cityID: City.ID) {
-        self.airportID = cityID
-        self.cityID = airportID
+        self.airportID = airportID
+        self.cityID = cityID
     }
     
 }

@@ -8,7 +8,7 @@ struct CitiesController: RouteCollection {
         citiesRoute.post(City.self, use: createHandler)
         citiesRoute.get(City.parameter, use: getHandler)
         citiesRoute.delete(City.parameter, use: deleteHandler)
-        citiesRoute.get(City.parameter,"airports", use: getAirPortsHandler)
+      
     }
     
     
@@ -26,10 +26,7 @@ struct CitiesController: RouteCollection {
             
         }
     }
-    func getAirPortsHandler(_ req: Request) throws -> Future<[AirPort]> {
-        return try req.parameters.next(City.self).flatMap(to: [AirPort].self) { city in
-            return try city.airports.query(on: req).all()
-            
-        }
-    }
+     
+    
+    
 }

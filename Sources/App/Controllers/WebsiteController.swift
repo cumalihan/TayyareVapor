@@ -6,6 +6,7 @@ struct WebsiteController: RouteCollection {
         router.get("airplanes",AirPlane.parameter, use: airplaneHandler)
         router.get("aircompanies",AirCompany.parameter,use: aircompanyHandler)
         router.get("aircompanies", use: allAircompanyHandler)
+        router.get("cities", use: AllCityHandler)
         router.get("airplanes","create",use: createAirplaneHandler)
         router.post(AirPlane.self,at: "airplanes","create", use: createAirplanePostHandler)
         router.get("airplanes",AirPlane.parameter,"edit",use: editAirplaneHandler)
@@ -82,6 +83,12 @@ struct WebsiteController: RouteCollection {
         }
     }
     
+    func AllCityHandler(_ req: Request) throws -> Future<View> {
+          let context = AllCityContext( cities : City.query(on: req).all())
+          return try req.view().render("cities", context)
+      }
+   
+    
 }
 
 struct IndexContext : Encodable {
@@ -118,4 +125,10 @@ struct EditAirplaneContext: Encodable {
     let airplane: AirPlane
     let aircompanies : [AirCompany]
     let editing = true
+}
+
+
+struct AllCityContext : Encodable {
+    let title = "All City"
+    let cities: Future<[City]>
 }
