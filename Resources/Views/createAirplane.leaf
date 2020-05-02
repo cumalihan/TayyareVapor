@@ -1,6 +1,6 @@
 
 #set("content") {
-<h1>#if(editing){Edit Airplane} else {Create an Airplane}</h1>
+<h1>#if(editing){Editing Airplane} else{Create an Airplane}</h1>
 <form method="post">
     
     <div class = "form-group">
@@ -23,7 +23,7 @@
         <label for="aircompanyID">Air Company</label>
             <select id="aircompanyID" name="aircompanyID" class="form-control">
                     #for(aircompany in aircompanies) {
-                    <option value ="#(aircompany.id)" #if(aircompany.id == airplane.aircompanyID {selected}>#(aircompany.company)</option>
+                    <option value ="#(aircompany.id)" #if(aircompany.id == airplane.aircompanyID){selected}>#(aircompany.company)</option>
                     }
             </select>
              </div>

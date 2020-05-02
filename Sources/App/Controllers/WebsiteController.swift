@@ -11,6 +11,7 @@ struct WebsiteController: RouteCollection {
         router.post(AirPlane.self,at: "airplanes","create", use: createAirplanePostHandler)
         router.get("airplanes",AirPlane.parameter,"edit",use: editAirplaneHandler)
         router.post("airplanes",AirPlane.parameter,"edit", use: editAirplanePostHandler)
+        router.post("airplanes",AirPlane.parameter,"delete",use: deleteHandler)
         
         
      
@@ -87,7 +88,12 @@ struct WebsiteController: RouteCollection {
           let context = AllCityContext( cities : City.query(on: req).all())
           return try req.view().render("cities", context)
       }
-   
+    func deleteHandler(_ req: Request) throws -> Future<Response> {
+        return try req.parameters.next(AirPlane.self).flatMap(to: Response.self) { airplane in
+            return airplane.delete(on: req).transform(to: req.redirect(to: "/"))
+            
+        }
+    }
     
 }
 
