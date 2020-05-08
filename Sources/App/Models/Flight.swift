@@ -11,8 +11,7 @@ final class Flight: Codable {
     var arrivalTime: String
     var deparuteCountry: String
     var arrivalCountry: String
-   
-    
+
    
     init(flightNumber: String,departureTime: String,arrivalTime: String,deparuteCountry: String,arrivalCountry: String) {
         self.flightNumber = flightNumber

@@ -12,7 +12,7 @@ final class City: Codable {
         self.cityCountry = cityCountry
     }
     
-}
+    }
 
 
 extension City: MySQLModel {}

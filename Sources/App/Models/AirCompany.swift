@@ -15,6 +15,9 @@ final class AirCompany: Codable {
         self.airPlaneCount = airPlaneCount
         
     }
+    
+  
+
 }
 
 
@@ -29,3 +32,8 @@ extension AirCompany {
         return children(\.aircompanyID)
     }
 }
+
+
+
+
+

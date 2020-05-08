@@ -1,5 +1,7 @@
 import Vapor
 
+
+
 struct WebsiteController: RouteCollection {
     func boot(router: Router) throws {
         router.get(use: indexHandler)
