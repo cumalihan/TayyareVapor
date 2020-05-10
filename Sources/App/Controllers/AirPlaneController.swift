@@ -38,9 +38,9 @@ struct AirplaneController: RouteCollection {
         }
     }
 
-    func getCompanyHandler(_ req: Request) throws -> Future<AirCompany> {
-        return try req.parameters.next(AirPlane.self).flatMap(to: AirCompany.self) { airplane in
-            return airplane.aircompany.get(on: req)
+    func getCompanyHandler(_ req: Request) throws -> Future<AirCompany.Public> {
+        return try req.parameters.next(AirPlane.self).flatMap(to: AirCompany.Public.self) { airplane in
+            return airplane.aircompany.get(on: req).convertToPublic()
             
         }
     }

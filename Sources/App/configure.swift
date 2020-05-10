@@ -1,6 +1,7 @@
 import FluentMySQL
 import Vapor
 import Leaf
+import Authentication
 /// Called before your application initializes.
 
 
@@ -8,6 +9,7 @@ import Leaf
         // Register providers first
         try services.register(FluentMySQLProvider())
         try services.register(LeafProvider())
+        try services.register(AuthenticationProvider())
         
         // Register routes to the router
         let router = EngineRouter.default()
@@ -35,10 +37,12 @@ import Leaf
         migrations.add(model: AirCompany.self, database: .mysql)
         migrations.add(model: City.self, database: .mysql)
         migrations.add(model: AirPortCityPivot.self, database: .mysql)
+        migrations.add(model: Token.self, database: .mysql)
         services.register(migrations)
         
         
         config.prefer(LeafRenderer.self, for: ViewRenderer.self)
+        config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
     }
 
 
